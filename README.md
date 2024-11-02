@@ -1,6 +1,6 @@
 ## CondoCare
-O CondoCare é um sistema desenvolvido para auxiliar na gestão de condomínios, facilitando a reserva de áreas comuns e o controle das entregas na portaria. 
-Ele é composto por um front-end em Angular e um back-end em Kotlin (usando o framework Ktor), que é nosso foco de melhoria.
+O CondoCare é um sistema desenvolvido em 2023 para auxiliar na gestão de condomínios, facilitando a reserva de áreas comuns e o controle das entregas na portaria. 
+Ele é composto por um front-end em Angular e um back-end em Kotlin (usando o framework Ktor), que é nosso foco de melhoria, e foi desenvolvido para a disciplina de Tecnologias para Desenvolvimento Web.
 
 ### Funcionalidades Principais
 #### 1. Reserva de Áreas Comuns:
@@ -32,6 +32,10 @@ O Repository Pattern permite um encapsulamento da lógica de acesso a dados, imp
 - Diminui o acoplamento entre classes.
 - Padronização de códigos e serviços.
 
-Mais informações [aqui](https://renicius-pagotto.medium.com/entendendo-o-repository-pattern-fcdd0c36b63b)
+Mais informações [aqui](https://renicius-pagotto.medium.com/entendendo-o-repository-pattern-fcdd0c36b63b).
 
+Vamos fazer a modificação para um Repository Pattern nos códigos relacionados à "Reservation", que são os que cuidam da reserva de áreas comuns.
+
+![image](https://github.com/user-attachments/assets/5cef380a-6640-4a5f-846e-0e61f87b4920)
+Estrutura do projeto antes das modificações
 
