@@ -23,7 +23,7 @@ Exceções não tratadas no acesso ao banco de dados podem fazer com que o códi
 
 
 ## Separação da Lógica de Negócio e Acesso ao Banco de Dados
-#### Padrão de Projeto: Repository
+### Padrão de Projeto: Repository
 O Repository Pattern permite um encapsulamento da lógica de acesso a dados, impulsionando o uso da injeção de dependencia (DI) e proporcionando uma visão mais orientada a objetos das interações com a DAL.
 #### Os grandes benefícos ao utilizar esse pattern são:
 - Permitir a troca do banco de dados utilizado sem afetar o sistema como um todo.
