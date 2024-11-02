@@ -11,7 +11,7 @@ Inclui um sistema para verificar a disponibilidade das áreas, evitando conflito
 Gerencia as entregas que chegam ao condomínio e possibilita que o porteiro registre o recebimento de encomendas para os moradores.
 Usa autenticação JWT para garantir que cada morador visualize apenas suas próprias informações e entregas.
 
-#### Melhorias Identificadas:
+## Melhorias Identificadas:
 ##### 1. Separação da Lógica de Negócio e Acesso ao Banco de Dados: 
 A lógica de manipulação de dados e o acesso ao banco de dados estão misturados.
 
