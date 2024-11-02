@@ -19,7 +19,18 @@ A lógica de manipulação de dados e o acesso ao banco de dados estão misturad
 A validação de dados (por exemplo, checar se o id existe antes de atualizar ou deletar) está implementada diretamente nas rotas, misturando a lógica de negócios com a configuração das rotas.
 
 #### 3. Tratamento de Exceções: 
-Exceções no acesso ao banco de dados podem fazer com que o código quebre ou retorne erros inesperados.
+Exceções não tratadas no acesso ao banco de dados podem fazer com que o código quebre ou retorne erros inesperados.
+
+
+## Separação da Lógica de Negócio e Acesso ao Banco de Dados
+#### Padrão de Projeto: Repository
+O Repository Pattern permite um encapsulamento da lógica de acesso a dados, impulsionando o uso da injeção de dependencia (DI) e proporcionando uma visão mais orientada a objetos das interações com a DAL.
+#### Os grandes benefícos ao utilizar esse pattern são:
+- Permitir a troca do banco de dados utilizado sem afetar o sistema como um todo.
+- Código centralizado em um único ponto, evitando duplicidade.
+- Facilita a implementação de testes unitários.
+- Diminui o acoplamento entre classes.
+- Padronização de códigos e serviços.
 
 
 
