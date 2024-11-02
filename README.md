@@ -55,7 +55,7 @@ O código já está organizado em uma arquitetura baseada em camadas, separando 
 
 Agora o Repository Service, antigo ReservationDB, utiliza a interface ReservationRepository para realizar operações, facilitando a substituição do repositório se necessário.
 
-`package com.condocare.repositories
+```package com.condocare.repositories
 
 import com.condocare.models.Reservation
 import kotlinx.coroutines.Dispatchers
@@ -126,4 +126,4 @@ class ReservationRepositoryImpl(private val database: Database) : ReservationRep
         name = this[Reservations.name],
         date = this[Reservations.date]
     )
-}`
+}
