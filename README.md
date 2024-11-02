@@ -50,10 +50,7 @@ O código já está organizado em uma arquitetura baseada em camadas, separando 
 ![image](https://github.com/user-attachments/assets/8d75bea5-11cb-4b0f-a9ff-4c2a34ce6abb)
 ###### Figura 2. Estrutura do projeto após as modificações.
 
-![image](https://github.com/user-attachments/assets/c5af7ad8-7e68-409f-a321-c7eb412aaa94)
-###### Figura 3. Repository Service.
-
-Agora o Repository Service, antigo ReservationDB, utiliza a interface ReservationRepository para realizar operações, facilitando a substituição do repositório se necessário.
+E assim fica a implementação de ReservationRepositoryImpl, que realiza as operações no banco de dados usando a biblioteca Exposed e o objeto Reservations que representa a tabela no banco.
 
 ```kotlin
 package com.condocare.repositories
@@ -127,4 +124,13 @@ class ReservationRepositoryImpl(private val database: Database) : ReservationRep
         name = this[Reservations.name],
         date = this[Reservations.date]
     )
-}```
+}
+```
+
+Serviço de Reservas (ReservationService.kt): Agora, a camada de serviço é responsável por gerenciar apenas a lógica de negócios.
+Aqui, o ReservationService recebe uma instância de ReservationRepository e delega as operações para ele:
+
+![image](https://github.com/user-attachments/assets/c5af7ad8-7e68-409f-a321-c7eb412aaa94)
+
+###### Figura 3. Repository Service.
+
