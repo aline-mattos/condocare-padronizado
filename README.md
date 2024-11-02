@@ -50,3 +50,80 @@ O código já está organizado em uma arquitetura baseada em camadas, separando 
 ![image](https://github.com/user-attachments/assets/8d75bea5-11cb-4b0f-a9ff-4c2a34ce6abb)
 ###### Figura 2. Estrutura do projeto após as modificações.
 
+![image](https://github.com/user-attachments/assets/c5af7ad8-7e68-409f-a321-c7eb412aaa94)
+###### Figura 3. Repository Service.
+
+Agora o Repository Service, antigo ReservationDB, utiliza a interface ReservationRepository para realizar operações, facilitando a substituição do repositório se necessário.
+`package com.condocare.repositories
+
+import com.condocare.models.Reservation
+import kotlinx.coroutines.Dispatchers
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import java.util.*
+
+class ReservationRepositoryImpl(private val database: Database) : ReservationRepository {
+    object Reservations : Table() {
+        val id = varchar("id", 255)
+        val type = varchar("type", 255).nullable()
+        val name = varchar("name", 255).nullable()
+        val date = varchar("date", 255).nullable()
+
+        override val primaryKey = PrimaryKey(id)
+    }
+
+    init {
+        transaction(database) {
+            SchemaUtils.create(Reservations)
+        }
+    }
+
+    private suspend fun <T> dbQuery(block: suspend () -> T): T =
+        newSuspendedTransaction(Dispatchers.IO) { block() }
+
+    override suspend fun create(newReservation: Reservation): Reservation {
+        val id = UUID.randomUUID().toString()
+        dbQuery {
+            Reservations.insert { row ->
+                row[Reservations.id] = id
+                row[Reservations.type] = newReservation.type
+                row[Reservations.name] = newReservation.name
+                row[Reservations.date] = newReservation.date
+            }
+        }
+        return findById(id) ?: throw IllegalStateException("Falha ao criar a reserva")
+    }
+
+    override suspend fun findAll(): List<Reservation> = dbQuery {
+        Reservations.selectAll().map { row -> row.toReservation() }
+    }
+
+    override suspend fun findById(id: String): Reservation? = dbQuery {
+        Reservations.select { Reservations.id eq id }
+            .map { row -> row.toReservation() }
+            .singleOrNull()
+    }
+
+    override suspend fun update(id: String, updatedReservation: Reservation): Reservation? {
+        val affectedRows = dbQuery {
+            Reservations.update({ Reservations.id eq id }) {
+                it[type] = updatedReservation.type
+                it[name] = updatedReservation.name
+                it[date] = updatedReservation.date
+            }
+        }
+        return if (affectedRows > 0) findById(id) else null
+    }
+
+    override suspend fun delete(id: String) {
+        dbQuery { Reservations.deleteWhere { Reservations.id eq id } }
+    }
+
+    private fun ResultRow.toReservation() = Reservation(
+        id = this[Reservations.id],
+        type = this[Reservations.type],
+        name = this[Reservations.name],
+        date = this[Reservations.date]
+    )
+}
+`
