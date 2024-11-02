@@ -1,0 +1,2 @@
+Identificando padrões e melhorias
+
