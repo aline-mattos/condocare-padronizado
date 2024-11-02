@@ -32,5 +32,6 @@ O Repository Pattern permite um encapsulamento da lógica de acesso a dados, imp
 - Diminui o acoplamento entre classes.
 - Padronização de códigos e serviços.
 
+Mais informações [aqui](https://renicius-pagotto.medium.com/entendendo-o-repository-pattern-fcdd0c36b63b)
 
 
