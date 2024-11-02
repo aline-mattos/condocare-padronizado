@@ -12,13 +12,13 @@ Gerencia as entregas que chegam ao condomínio e possibilita que o porteiro regi
 Usa autenticação JWT para garantir que cada morador visualize apenas suas próprias informações e entregas.
 
 ## Melhorias Identificadas:
-### 1. Separação da Lógica de Negócio e Acesso ao Banco de Dados: 
+#### 1. Separação da Lógica de Negócio e Acesso ao Banco de Dados: 
 A lógica de manipulação de dados e o acesso ao banco de dados estão misturados.
 
-### 2. Validação de Dados na Camada de Serviço: 
+#### 2. Validação de Dados na Camada de Serviço: 
 A validação de dados (por exemplo, checar se o id existe antes de atualizar ou deletar) está implementada diretamente nas rotas, misturando a lógica de negócios com a configuração das rotas.
 
-### 3. Tratamento de Exceções: 
+#### 3. Tratamento de Exceções: 
 Exceções no acesso ao banco de dados podem fazer com que o código quebre ou retorne erros inesperados.
 
 
