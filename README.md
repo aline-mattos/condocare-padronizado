@@ -39,9 +39,10 @@ Vamos fazer a modificação para um Repository Pattern nos códigos relacionados
 ![image](https://github.com/user-attachments/assets/5cef380a-6640-4a5f-846e-0e61f87b4920)
 
 
-Figura 1. Estrutura do projeto antes das modificações.
+###### Figura 1. Estrutura do projeto antes das modificações.
 
-Visão Geral da Estrutura
+####Visão Geral da Estrutura
+
 O código já está organizado em uma arquitetura baseada em camadas, separando as responsabilidades de cada código, porém adicionamos o "services":
 - Modelo de Dados (models)
 - Repositório (repositories)
