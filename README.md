@@ -28,7 +28,7 @@ Usa autenticação JWT para garantir que cada morador visualize apenas suas pró
 **2. Imutabilidade e Segurança no Código:** O Builder Pattern pode ajudar a tornar os objetos imutáveis após a criação, promovendo um design mais seguro e estável. Em vez de definir todos os valores de uma só vez, o builder permite que todos os valores sejam configurados com precisão antes de chamar o método build(), que cria o objeto final imutável. Objetos imutáveis são menos propensos a erros e são mais fáceis de depurar.
 
 ## Padrão de Projeto: Repository
-### O Repository Pattern é um padrão de design que visa abstrair a lógica de acesso a dados, permitindo que a aplicação interaja com diferentes fontes de dados (como bancos de dados, arquivos, APIs, etc.) sem se preocupar com os detalhes de implementação. Isso promove uma separação clara entre a lógica de negócios e a lógica de persistência, facilitando a manutenção e os testes do código.
+O Repository Pattern é um padrão de design que visa abstrair a lógica de acesso a dados, permitindo que a aplicação interaja com diferentes fontes de dados (como bancos de dados, arquivos, APIs, etc.) sem se preocupar com os detalhes de implementação. Isso promove uma separação clara entre a lógica de negócios e a lógica de persistência, facilitando a manutenção e os testes do código.
 
 Vamos fazer a modificação para um Repository Pattern nos códigos relacionados à "Reservation", que são os que cuidam da reserva de áreas comuns.
 
@@ -133,7 +133,29 @@ Aqui, o ReservationService recebe uma instância de ReservationRepository e dele
 ## Padrão de Projeto: Singleton
 O Singleton é um padrão de projeto criacional que permite a você garantir que uma classe tenha apenas uma instância, enquanto provê um ponto de acesso global para essa instância.
 
+Vamos transformar os arquivos de "service" em singleton para que possam ser instanciadas apenas uma vez:
 
+![image](https://github.com/user-attachments/assets/6b499ce9-e0ff-4b8c-87e9-b65895426d75)
+###### Figura 4. Singleton em RepositoryService.kt.
+
+Chamando na Application.kt:
+
+![image](https://github.com/user-attachments/assets/602ee308-571e-47a6-803b-eb468010c5a0)
+###### Figura 5. Instanciação de ReservationService com Singleton e configuração da rota.
+
+## Padrão de Projeto: Builder
+
+O Builder é um padrão de projeto criacional que permite a você construir objetos complexos passo a passo. 
+
+O padrão permite que você produza diferentes tipos e representações de um objeto usando o mesmo código de construção.
+
+Vamos modificar nossas classes com o padrão Builder, abaixo o exemplo da "Reservation":
+
+![image](https://github.com/user-attachments/assets/7e1f8ee9-e5de-46d8-b301-c539313e92e0)
+
+###### Figura 6. Reservation como um objeto com a Classe Builder e métodos para definição de cada atributo.
+
+A aplicação dos padrões trouxe maior modularidade, segurança e facilidade de manutenção ao projeto CondoCare. O Singleton garantiu uma única instância dos serviços, economizando recursos e aumentando o controle sobre dependências compartilhadas. O Builder proporcionou uma forma flexível e clara de construir objetos complexos como Reservation, garantindo consistência e segurança contra modificações inesperadas. Já o Repository separou a lógica de acesso ao banco de dados da lógica de negócios, tornando o código mais modular e testável, além de facilitar futuras mudanças de tecnologia de persistência sem impacto nos serviços e controladores. Esses padrões aprimoram o design do projeto, preparando-o para evoluir de forma escalável e sustentável.
 
 ##  Referências:
 [Padrão Repository](https://dev.to/diariodeumacdf/padroes-dao-e-repository-13nj)
