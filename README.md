@@ -158,6 +158,4 @@ Vamos modificar nossas classes com o padrão Builder, abaixo o exemplo da "Reser
 A aplicação dos padrões trouxe maior modularidade, segurança e facilidade de manutenção ao projeto CondoCare. O Singleton garantiu uma única instância dos serviços, economizando recursos e aumentando o controle sobre dependências compartilhadas. O Builder proporcionou uma forma flexível e clara de construir objetos complexos como Reservation, garantindo consistência e segurança contra modificações inesperadas. Já o Repository separou a lógica de acesso ao banco de dados da lógica de negócios, tornando o código mais modular e testável, além de facilitar futuras mudanças de tecnologia de persistência sem impacto nos serviços e controladores. Esses padrões aprimoram o design do projeto, preparando-o para evoluir de forma escalável e sustentável.
 
 ##  Referências:
-[Padrão Repository](https://dev.to/diariodeumacdf/padroes-dao-e-repository-13nj)
-[Padrão Singleton](https://refactoring.guru/pt-br/design-patterns/singleton)
-[Padrão Builder](https://refactoring.guru/pt-br/design-patterns/builder)
+[Padrão Repository](https://dev.to/diariodeumacdf/padroes-dao-e-repository-13nj);[Padrão Singleton](https://refactoring.guru/pt-br/design-patterns/singleton);[Padrão Builder](https://refactoring.guru/pt-br/design-patterns/builder)
