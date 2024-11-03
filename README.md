@@ -11,28 +11,24 @@ Inclui um sistema para verificar a disponibilidade das áreas, evitando conflito
 Gerencia as entregas que chegam ao condomínio e possibilita que o porteiro registre o recebimento de encomendas para os moradores.
 Usa autenticação JWT para garantir que cada morador visualize apenas suas próprias informações e entregas.
 
-## Melhorias Identificadas:
-#### 1. Separação da Lógica de Negócio e Acesso ao Banco de Dados: 
-A lógica de manipulação de dados e o acesso ao banco de dados estão misturados.
+## Padrões de projeto utilizados e as melhorias identificadas:
+### 1. Padrão de Projeto: Repository
+**1. Separação da Lógica de Negócio e Acesso a Dados:** A lógica de acesso a dados é isolada da lógica de negócios do serviço utilizando o padrão Repository. Isso traz uma clara separação de responsabilidades, facilitando a leitura, manutenção e evolução do código. O serviço ("services") se concentra exclusivamente nas regras de negócios, enquanto o repositório ("repository") lida com o armazenamento de dados. Esse encapsulamento permite que mudanças no banco de dados ou nas consultas SQL afetem apenas o repositório, sem impactar a camada de serviço.
 
-#### 2. Validação de Dados na Camada de Serviço: 
-A validação de dados (por exemplo, checar se o id existe antes de atualizar ou deletar) está implementada diretamente nas rotas, misturando a lógica de negócios com a configuração das rotas.
+**2. Flexibilidade para Trocar ou Evoluir o Banco de Dados:** O Repository Pattern abstrai os detalhes do armazenamento de dados, permitindo que o ReservationService e outros serviços dependam apenas da interface do repositório, sem conhecer detalhes de implementação do banco de dados. Isso facilita mudanças no sistema de armazenamento, como trocar o banco relacional por um banco NoSQL (nesse projeto foi utilizado o MySQL) ou até mesmo modificar o tipo de persistência (por exemplo, de um banco de dados local para um serviço de armazenamento em nuvem). Essa flexibilidade é útil para evoluir a arquitetura do projeto conforme as necessidades.
 
-#### 3. Tratamento de Exceções: 
-Exceções não tratadas no acesso ao banco de dados podem fazer com que o código quebre ou retorne erros inesperados.
+### 2. Padrão de Projeto: Singleton
+**1. Redução no Consumo de Recursos:** Criar um serviço como singleton garante que apenas uma instância desse serviço será criada durante toda a vida útil da aplicação. Isso evita a criação desnecessária de múltiplas instâncias, reduzindo o uso de memória e melhorando a eficiência geral do sistema. Como resultado, as operações de manipulação de dados (como no ReservationService) podem ser realizadas de maneira mais econômica, especialmente em serviços que são usados com frequência.
 
+**2. Facilidade de Manutenção e Consistência de Estado:** Um singleton para o ReservationService e outros serviços evita inconsistências de estado, pois todas as chamadas para o serviço compartilham a mesma instância. Isso pode ser útil para gerenciar o estado compartilhado (por exemplo, configurações, conexão com o banco de dados ou cache de dados). Com uma única instância, é mais fácil aplicar atualizações e garantir que todas as partes da aplicação utilizem a versão mais recente e atualizada do serviço.
 
-## Separação da Lógica de Negócio e Acesso ao Banco de Dados
-### Padrão de Projeto: Repository
-O Repository Pattern permite um encapsulamento da lógica de acesso a dados, impulsionando o uso da injeção de dependencia (DI) e proporcionando uma visão mais orientada a objetos das interações com a DAL.
-#### Os grandes benefícos ao utilizar esse pattern são:
-- Permitir a troca do banco de dados utilizado sem afetar o sistema como um todo.
-- Código centralizado em um único ponto, evitando duplicidade.
-- Facilita a implementação de testes unitários.
-- Diminui o acoplamento entre classes.
-- Padronização de códigos e serviços.
+### 3. Padrão de Projeto: Builder
+**1. Facilidade na Criação de Objetos Complexos:** O Builder Pattern é ideal para criar objetos com muitos parâmetros opcionais ou com configurações complexas, como o Reservation. Em vez de sobrecarregar os construtores com várias combinações de argumentos, o padrão permite criar objetos de forma clara e fluente. Cada campo pode ser definido separadamente, evitando a criação de construtores longos e melhorando a legibilidade do código. Isso é especialmente útil se a classe Reservation ou outras classes do projeto crescerem em complexidade.
 
-Mais informações [aqui](https://renicius-pagotto.medium.com/entendendo-o-repository-pattern-fcdd0c36b63b).
+**2. Imutabilidade e Segurança no Código:** O Builder Pattern pode ajudar a tornar os objetos imutáveis após a criação, promovendo um design mais seguro e estável. Em vez de definir todos os valores de uma só vez, o builder permite que todos os valores sejam configurados com precisão antes de chamar o método build(), que cria o objeto final imutável. Objetos imutáveis são menos propensos a erros e são mais fáceis de depurar.
+
+## Padrão de Projeto: Repository
+### O Repository Pattern é um padrão de design que visa abstrair a lógica de acesso a dados, permitindo que a aplicação interaja com diferentes fontes de dados (como bancos de dados, arquivos, APIs, etc.) sem se preocupar com os detalhes de implementação. Isso promove uma separação clara entre a lógica de negócios e a lógica de persistência, facilitando a manutenção e os testes do código.
 
 Vamos fazer a modificação para um Repository Pattern nos códigos relacionados à "Reservation", que são os que cuidam da reserva de áreas comuns.
 
@@ -134,3 +130,12 @@ Aqui, o ReservationService recebe uma instância de ReservationRepository e dele
 
 ###### Figura 3. Repository Service.
 
+## Padrão de Projeto: Singleton
+O Singleton é um padrão de projeto criacional que permite a você garantir que uma classe tenha apenas uma instância, enquanto provê um ponto de acesso global para essa instância.
+
+
+
+##  Referências:
+[Padrão Repository](https://dev.to/diariodeumacdf/padroes-dao-e-repository-13nj)
+[Padrão Singleton](https://refactoring.guru/pt-br/design-patterns/singleton)
+[Padrão Builder](https://refactoring.guru/pt-br/design-patterns/builder)
