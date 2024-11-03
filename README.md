@@ -135,7 +135,7 @@ O Singleton é um padrão de projeto criacional que permite a você garantir que
 
 Vamos transformar os arquivos de "service" em singleton para que possam ser instanciadas apenas uma vez:
 
-![image](https://github.com/user-attachments/assets/6b499ce9-e0ff-4b8c-87e9-b65895426d75)
+![image](https://github.com/user-attachments/assets/9c33187b-f8e9-478e-bd99-8776821f11f7)
 ###### Figura 4. Singleton em RepositoryService.kt.
 
 Chamando na Application.kt:
